@@ -1,0 +1,12 @@
+{% extends 'layout/layout.html' %}
+
+{% block contenido %}
+    <form method="post">
+        <label for="nombre">Nombre: </label>
+        <input type="text">
+        <label for="descripcion">Descripción: </label>
+        <input type="textarea">
+
+        <input type="submit" value="Crear">
+    </form>
+{% endblock %}

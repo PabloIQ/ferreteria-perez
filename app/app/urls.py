@@ -20,4 +20,5 @@ from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.Index, name='inicio'),
+    path('crear-producto/', views.CrearProducto, name='crear_producto'),
 ]
