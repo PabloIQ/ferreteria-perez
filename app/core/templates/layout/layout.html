@@ -21,6 +21,9 @@
     <!-- Slick -->
 	<link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}"/>
 	<link type="text/css" rel="stylesheet" href="{% static 'css/slick-theme.css' %}"/>
+    <!--------------------Sweet Alert 2-------------------->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!---------------------------------------------------------->
 
 
 
@@ -38,11 +41,24 @@
 						<li><a href="#"><i class="fa fa-map-marker"></i>  Santa Cruz el Quiche</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> </a>GTQ</li>
-						<li><a href="#"><i class="fa fa-user-o"></i> Mi Cuenta</a></li>
+						<li><a href="#"><i class="fa fa-user-o"></i> Mi Cuenta </a></li>
 					</ul>
+
+                    <ul class="header-links pull-right">
+						<li><a href="#"><i class="fa fa-user-o"></i> <button onclick="alerta()">Regisgistrase</button> </a></li>
+					</ul>
+
 				</div>
 			</div>
+            <script>
+                function alerta () {
+                    Swal.fire(
+                                'The Internet?',
+                                'That thing is still around?',
+                                'question'
+                            )
+                }
+            </script>
 			<!-- /TOP HEADER -->
 
     <!-- MAIN HEADER -->
