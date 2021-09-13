@@ -7,26 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Inicio</title>
-
+    <!-- Link Boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
+    crossorigin="anonymous">
+    <!-- /Link Boostrap -->
+    
     <!-- Archivo stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
+	<link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
     <!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
     <!-- nouislider -->
-	<link type="text/css" rel="stylesheet" href="{% static 'css/nouislider.min.css' %}"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/nouislider.min.css' %}"/>
     <!-- Font Awesome Icon -->
-	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" 
+    crossorigin="anonymous">
+
     <!-- Slick -->
-	<link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}"/>
 	<link type="text/css" rel="stylesheet" href="{% static 'css/slick-theme.css' %}"/>
-    <!--------------------Sweet Alert 2-------------------->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!---------------------------------------------------------->
-
-
-
+   
 </head>
 
 <body>
@@ -36,29 +39,20 @@
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +502 47869523</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> ferreteriaperez@gmail.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i>  Santa Cruz el Quiche</a></li>
+						<li><a href="#"><i class="fas fa-phone"></i> +502 47869523</a></li>
+						<li><a href="#"><i class="fas fa-envelope"></i> ferreteriaperez@gmail.com</a></li>
+						<li><a href="#"><i class="fas fa-map-marker-alt"></i>  Santa Cruz el Quiche</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-user-o"></i> Mi Cuenta </a></li>
+				
+                        <li><a href="#" onclick="alerta()" > <i class="fas fa-user-edit"></i> Registrarse</a></li>
+						
+                        <li><a href="#"><i class="fa fa-user"></i> Mi Cuenta</a></li>
 					</ul>
-
-                    <ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-user-o"></i> <button onclick="alerta()">Regisgistrase</button> </a></li>
-					</ul>
-
 				</div>
 			</div>
-            <script>
-                function alerta () {
-                    Swal.fire(
-                                'The Internet?',
-                                'That thing is still around?',
-                                'question'
-                            )
-                }
-            </script>
+          
+
 			<!-- /TOP HEADER -->
 
     <!-- MAIN HEADER -->
@@ -70,7 +64,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a href="{% url 'index_' %}" class="logo">
                             <img src="{% static 'img/logo.png' %}" alt="">
                         </a>
                     </div>
@@ -87,7 +81,9 @@
                                 <option value="1">Categoria 02</option>
                             </select>
                             <input class="input" placeholder="Buscar Producto">
-                            <button class="search-btn">Buscar</button>
+                                <a href="{% url 'not_found' %}">       
+                                    <button class="search-btn">Buscar</button>
+                                </a> 
                         </form>
                     </div>
                 </div>
@@ -96,14 +92,7 @@
                 <!-- ACCOUNT -->
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
-                        <!-- Wishlist -->
-                        <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Lista de Deseos</span>
-                                <div class="qty">0</div>
-                            </a>
-                        </div>
+                     
                         <!-- /Wishlist -->
 
                         <!-- Cart -->
@@ -117,13 +106,8 @@
                         </div>
                         
 
-                        <!-- Menu Toogle -->
-                        <div class="menu-toggle">
-                            <a href="#">
-                                <i class="fa fa-bars"></i>
-                                <span>Menu</span>
-                            </a>
-                        </div>
+                         <!--Menu Toogle -->
+                       
                         <!-- /Menu Toogle -->
                     </div>
                 </div>
@@ -137,28 +121,155 @@
 </header>
 <!-- /HEADER -->
 
-<!-- NAVIGATION -->
-    <nav id="navigation">
-        <!-- container -->
-        <div class="container">
-            <!-- responsive-nav -->
-            <div id="responsive-nav">
-                <!-- NAV -->
-                <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="#">Inicio</a></li>
-                    <li><a href="#">Lo más Vendido!</a></li>
-                    <li><a href="#">Lo más Visto</a></li>
-                    <li><a href="#">Productos en Promocion</a></li>
-                    <li><a href="#">Ver Categorias</a></li>
-                    <li><a href="#">Administrador</a></li>   
-                </ul>
-                <!-- /NAV -->
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'inicio_' %}">Inicio</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" aria-current="page" href="#">Lo mas Vendido!</a>
+             
+              <a class="nav-link" href="#">Lo mas Visto!</a>
+              <a class="nav-link" href="#">Productos en Promocion</a>
+              <a class="nav-link" href="#">Categorias</a>
+              <a class="nav-link" href="#">Administrador</a>
             </div>
-            <!-- /responsive-nav -->
+          </div>
         </div>
-        <!-- /container -->
-    </nav>
+      </nav>
+
+
+
     <!-- /NAVIGATION -->
+
+  {% block contenido %}
+
+
+    <!-- /Aqui va el Contenido de las Paginas -->
+
+  {% endblock %}
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+crossorigin="anonymous"></script>
+
+
+    		<!-- FOOTER -->
+            <footer id="footer">
+                <!-- top footer -->
+                <div class="section">
+                    <!-- container -->
+                    <div class="container">
+                        <!-- row -->
+                        <div class="row">
+                            <div class="col-md-3 col-xs-6">
+                                <div class="footer">
+                                    <h3 class="footer-title">Sobre Nosotros</h3>
+                                    <p>Ferretería Perez se dedica a la venta de artículos y productos de ferretería y herramientas (eléctricas y manuales) para la remodelación, mantenimiento y decoración de hogares y oficinas..</p>
+                                    <ul class="footer-links">
+                                        <li><a href="#"><i class="fas fa-map-marker-alt"></i>Santa Cruz el Quiche</a></li>
+                                        <li><a href="#"><i class="fa fa-phone"></i>+502 57570855</a></li>
+                                        <li><a href="#"><i class="fas fa-envelope"></i>cruzpablo@email.com</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-3 col-xs-6">
+                                <div class="footer">
+                                    <h3 class="footer-title">Siguenos en</h3>
+                                <ul class="footer-links">
+                                        <li><a href="#"><i class="fab fa-facebook-square"></i>Facebook</a></li>
+                                        <li><a href="#"><i class="fab fa-instagram"></i>Instagram</a></li>
+                                        <li><a href="#"><i class="fab fa-twitter-square"></i>Twitter</a></li>
+                                        <li><a href="#"><i class="fab fa-youtube-square"></i>You Tube</a></li>
+                                        <li><a href="#"><i class="fab fa-snapchat-square"></i>SnapChat</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+    
+    
+    
+    
+                            <div class="col-md-3 col-xs-6">
+                                <div class="footer">
+                                    <h3 class="footer-title">Categorias</h3>
+                                    <ul class="footer-links">
+                                        <li><a href="#">Electricidad </a></li>
+                                        <li><a href="#">Plomeria</a></li>
+                                        <li><a href="#">Construccion </a></li>
+                                        <li><a href="#">Herramientas</a></li>
+                                        <li><a href="#">Pinturas</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+    
+                            <div class="clearfix visible-xs"></div>
+    
+                            <div class="col-md-3 col-xs-6">
+                                <div class="footer">
+                                    <h3 class="footer-title">Informacion</h3>
+                                    <ul class="footer-links">
+                                        <li><a href="#">Sobre Nosotros</a></li>
+                                        <li><a href="#">Contactanos</a></li>
+                                        <li><a href="#">Politicas de Privacidad</a></li>
+                                        <li><a href="#">Pedidos y Devoluciones</a></li>
+                                        <li><a href="#">Terminos y Condiciones</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                          
+                        </div>
+                        <!-- /row -->
+                           
+                    </div>
+                    <!-- /container -->
+                </div>
+                <!-- Redes Sociales -->
+          
+                <!-- Redes Sociales -->
+    
+                <!-- /top footer -->
+    
+                <!-- bottom footer -->
+                <div id="bottom-footer" class="section">
+                    <div class="container">
+                        <!-- row -->
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <ul class="footer-payments">
+                                    <li><a href="#"><i class="fab fa-cc-visa"></i></a></li>
+                                    <li><a href="#"><i class="fas fa-credit-card"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-cc-paypal"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-cc-mastercard"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-cc-discover"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-cc-amex"></i></a></li>
+                                </ul>
+                                <span class="copyright">
+                                    Todos lo derechos reservados. Realizado por Camilo y Pablo UMG 2021 <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                </span>
+    
+    
+                            </div>
+                        </div>
+                            <!-- /row -->
+                    </div>
+                    <!-- /container -->
+                </div>
+                <!-- /bottom footer -->
+            </footer>
+            <!-- /FOOTER -->
+    
+            <!-- jQuery Plugins -->
+            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/slick.min.js"></script>
+            <script src="js/nouislider.min.js"></script>
+            <script src="js/jquery.zoom.min.js"></script>
+            <script src="js/main.js"></script>
 
 
 </body>
