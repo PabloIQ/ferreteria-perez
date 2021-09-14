@@ -81,9 +81,9 @@
                                 <option value="1">Categoria 02</option>
                             </select>
                             <input class="input" placeholder="Buscar Producto">
-                                <a href="{% url 'not_found' %}">       
-                                    <button class="search-btn">Buscar</button>
-                                </a> 
+                                      
+                                    <button class="search-btn"><a href="{% url 'not_found' %}">Buscar</a></button>
+                            
                         </form>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
             <div class="navbar-nav">
               <a class="nav-link active" aria-current="page" href="#">Lo mas Vendido!</a>
              
-              <a class="nav-link" href="#">Lo mas Visto!</a>
+              <a class="nav-link" href="{% url 'not_found' %}">Lo mas Visto!</a>
               <a class="nav-link" href="#">Productos en Promocion</a>
               <a class="nav-link" href="#">Categorias</a>
               <a class="nav-link" href="#">Administrador</a>
