@@ -1,3 +1,59 @@
+/*
+Template Name: Electro - HTML Ecommerce Template
+Author: yaminncco
+
+Colors:
+	Body 		: #333
+	Headers 	: #2B2D42
+	Primary 	: #D10024
+	Dark 		: #15161D ##1E1F29
+	Grey 		: #E4E7ED #FBFBFC #8D99AE #B9BABC
+
+Fonts: Montserrat
+
+Table OF Contents
+------------------------------------
+1 > GENERAL
+------ Typography
+------ Buttons
+------ Inputs
+------ Sections
+------ Breadcrumb
+2 > HEADER
+------ Top header
+------ Logo
+------ Search
+------ Cart
+3 > NAVIGATION
+------ Main nav
+------ Responsive Nav
+4 > CATEGORY SHOP
+5 > HOT DEAL
+6 > PRODUCT
+------ Product
+------ Widget product
+------ Product slick
+7 > STORE PAGE
+------ Aside
+------ Store
+8 > PRODUCT DETAILS PAGE
+------ Product view
+------ Product details
+------ Product tab
+9 > CHECKOUT PAGE
+10 > NEWSLETTER
+11 > FOOTER
+11 > SLICK STYLE
+12 > RESPONSIVE
+------------------------------------*/
+
+/*=========================================================
+	01 -> GENERAL
+===========================================================*/
+
+/*----------------------------*\
+	Typography
+\*----------------------------*/
 
 body {
   font-family: 'Montserrat', sans-serif;
@@ -236,8 +292,8 @@ textarea.input {
 \*----------------------------*/
 
 .section {
-  padding-top: 20px;
-  padding-bottom: 25px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .section-title {
@@ -725,7 +781,6 @@ textarea.input {
   text-transform: uppercase;
 }
 
-
 /*=========================================================
 	05 -> HOT DEAL
 ===========================================================*/
@@ -1144,7 +1199,7 @@ textarea.input {
 }
 
 .products-slick-nav .slick-prev:before, .products-slick-nav .slick-next:before {
-  font-size: 14px;
+  font-size: 18px;
 }
 
 /*=========================================================
@@ -2040,7 +2095,7 @@ textarea.input {
 }
 
 .slick-prev:hover:before, .slick-prev:focus:before, .slick-next:hover:before, .slick-next:focus:before {
-  color: #FFF;
+  color: #000;
 }
 
 .slick-prev {
@@ -2132,4 +2187,114 @@ textarea.input {
     float: none;
     margin-top: 10px;
   }
+}
+
+
+/** Carrito Estilos**/
+
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.40rem
+}
+
+.img-sm {
+  width: 80px;
+  height: 80px
+}
+
+.itemside .info {
+  padding-left: 15px;
+  padding-right: 7px
+}
+
+.table-shopping-cart .price-wrap {
+  line-height: 1.2
+}
+
+.table-shopping-cart .price {
+  font-weight: bold;
+  margin-right: 5px;
+  display: block
+}
+
+.text-muted {
+  color: #969696 !important
+}
+
+a {
+  text-decoration: none !important
+}
+
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: 0px
+}
+
+.itemside {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%
+}
+
+.dlist-align {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex
+}
+
+[class*="dlist-"] {
+  margin-bottom: 5px
+}
+
+.coupon {
+  border-radius: 1px
+}
+
+.price {
+  font-weight: 600;
+  color: #212529
+}
+
+.btn.btn-out {
+  outline: 1px solid #fff;
+  outline-offset: -5px
+}
+
+.btn-main {
+  border-radius: 2px;
+  text-transform: capitalize;
+  font-size: 15px;
+  padding: 10px 19px;
+  cursor: pointer;
+  color: #fff;
+  width: 100%
+}
+
+.btn-light {
+  color: #ffffff;
+  background-color: #F44336;
+  border-color: #f8f9fa;
+  font-size: 12px
+}
+
+.btn-light:hover {
+  color: #ffffff;
+  background-color: #F44336;
+  border-color: #F44336
+}
+
+.btn-apply {
+  font-size: 11px
 }

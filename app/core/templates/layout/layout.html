@@ -26,6 +26,9 @@
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" 
     crossorigin="anonymous">
 
+    <!--Carrito -->
+   
+
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}"/>
 	<link type="text/css" rel="stylesheet" href="{% static 'css/slick-theme.css' %}"/>
@@ -80,7 +83,7 @@
                                 <option value="1">Categoria 01</option>
                                 <option value="1">Categoria 02</option>
                             </select>
-                            <input class="input" placeholder="Buscar Producto">
+                            <input  class="input" placeholder="Buscar Producto">
                                       
                                     <button class="search-btn"><a href="{% url 'not_found' %}">Buscar</a></button>
                             
@@ -96,13 +99,13 @@
                         <!-- /Wishlist -->
 
                         <!-- Cart -->
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                        <div  class="dropdown">
+                          
+                            <a onclick="enlace()" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Ver Carrito</span>
                                 <div class="qty">0</div>
                             </a>
-                            
                         </div>
                         
 
@@ -120,7 +123,14 @@
     <!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->
+<Script>
+function enlace(){
 
+    var url = "{% url 'carrito_' %}";
+ window.open(url, '_self');
+}
+
+</Script>
     <!-- NAVIGATION -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -264,12 +274,12 @@ crossorigin="anonymous"></script>
             <!-- /FOOTER -->
     
             <!-- jQuery Plugins -->
-            <script src="js/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/slick.min.js"></script>
-            <script src="js/nouislider.min.js"></script>
-            <script src="js/jquery.zoom.min.js"></script>
-            <script src="js/main.js"></script>
+            <script src="../static/js/jquery.min.js"></script>
+            <script src="../static/js/bootstrap.min.js"></script>
+            <script src="../static/js/slick.min.js"></script>
+            <script src="../static/js/nouislider.min.js"></script>
+            <script src="../static/js/jquery.zoom.min.js"></script>
+            <script src="../static/js/main.js"></script>
 
 
 </body>
