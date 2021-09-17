@@ -2298,3 +2298,8 @@ a {
 .btn-apply {
   font-size: 11px
 }
+
+
+.myclass {
+  background-image: url('img/foco.jpg');
+}
