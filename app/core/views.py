@@ -13,6 +13,8 @@ def NotFound (request):
     return render (request, 'producto/notfound.html')
 
 def Inicio (request):
+    
+
     return render (request, 'producto/inicio.html')
     
 def Carrito (request):
