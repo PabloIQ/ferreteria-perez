@@ -24,4 +24,6 @@ urlpatterns = [
     path('notfound/', views.NotFound, name='not_found'),
     path('inicio/', views.Inicio, name='inicio_'),
     path('carrito/', views.Carrito, name='carrito_'),
+    path('categoria/', views.Categoria, name='categoria_'),
+    path('iproducto/',views.Iproducto, name='I_producto'),
 ]

@@ -27,7 +27,9 @@
     crossorigin="anonymous">
 
     <!--Carrito -->
-   
+
+    <!--Archivo Java Funcion Formulario -->
+    <script defer type="text/javacript" src="{% static 'js/fuctiones.js' %}"></script>
 
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}"/>
@@ -36,6 +38,7 @@
 </head>
 
 <body>
+    
     <!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
@@ -142,7 +145,15 @@
               <a class="nav-link" href="{% url 'not_found' %}">Lo mas Visto!</a>
               <a class="nav-link" href="#">Productos en Promocion</a>
               <a class="nav-link" href="#">Categorias</a>
-              <a class="nav-link" href="#">Administrador</a>
+              <div class="administrador">
+                  <select class="optionadmin"> 
+                        <option value="Administrador">Administrador</option>  
+                        <option value="Categoria">Crear Categoria</option>
+                        <option value="Producto">Ingresar Producto</option>
+                        <option value="Proveedor">Registrar Proveedor</option>
+                        <option value="Usuario">Registrar Usuario</option>
+                  </select>
+              </div>
             </div>
           </div>
         </div>

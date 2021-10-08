@@ -17,3 +17,9 @@ def Inicio (request):
     
 def Carrito (request):
     return render (request, 'producto/carrito.html')
+
+def Categoria (request):
+    return render (request, 'administrador/categoria.html')
+
+def Iproducto (request):
+    return render (request, 'administrador/producto.html')

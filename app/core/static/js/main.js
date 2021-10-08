@@ -125,7 +125,7 @@
 		})
 	});
 
-	var priceInputMax = document.getElementById('price-max'),
+	/*var priceInputMax = document.getElementById('price-max'),
 			priceInputMin = document.getElementById('price-min');
 
 	priceInputMax.addEventListener('change', function(){
@@ -135,7 +135,7 @@
 	priceInputMin.addEventListener('change', function(){
 		updatePriceSlider($(this).parent() , this.value)
 	});
-
+*/
 	function updatePriceSlider(elem , value) {
 		if ( elem.hasClass('price-min') ) {
 			console.log('min')
@@ -166,3 +166,25 @@
 	}
 
 })(jQuery);
+
+
+
+var inputs = document.getElementsByClassName('formulario__input');
+
+for(var i=0; i < inputs.length; i++){
+inputs[i].addEventListener('keyup', function(){
+    if(this.value.length>=1){
+        
+        this.nextElementSibling.classList.add('fijar');
+    }else{
+        this.nextElementSibling.classList.remove('fijar');
+    }
+}
+);
+
+
+}
+
+function alerta(){
+    alert("Categoria Creada");
+}
