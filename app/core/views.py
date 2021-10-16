@@ -69,3 +69,10 @@ def Iproducto (request):
     return render (request, 'administrador/producto.html', {
         'categoria': categoria_list
     })
+
+
+def Proveedor (request):
+    return render (request, 'administrador/Proveedor.html')
+
+def Registrarse (request):
+    return render (request, 'administrador/Registrarse.html')
