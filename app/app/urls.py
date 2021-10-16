@@ -26,4 +26,6 @@ urlpatterns = [
     path('carrito/', views.Carrito, name='carrito_'),
     path('categoria/', views.Categoria_, name='categoria_'),
     path('iproducto/',views.Iproducto, name='I_producto'),
+    path('proveedor/', views.Proveedor, name='proveedor_'),
+    path('registrarse/',views.Registrarse, name='registrarse_'),
 ]
