@@ -24,6 +24,8 @@ def Inicio (request):
 def Carrito (request):
     return render (request, 'producto/carrito.html')
 
+
+
 def Categoria_ (request):
     if request.method == 'POST':
         nombre_cat = request.POST['nombre']
