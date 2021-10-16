@@ -43,7 +43,6 @@ def Categoria_ (request):
     return render (request, 'administrador/categoria.html')
 
 def Iproducto (request):
-<<<<<<< HEAD
     categoria_list = Categoria.objects.values('id', 'nombre')
     if request.method == 'POST':
         nombre = request.POST['nombre']
@@ -68,11 +67,3 @@ def Iproducto (request):
     return render (request, 'administrador/producto.html', {
         'categoria': categoria_list
     })
-=======
-    return render (request, 'administrador/producto.html')
-
-def Proveedor (request):
-    return render (request, 'administrador/proveedor.html')
-def Registrarse (request):
-    return render (request, 'administrador/registrarse.html')
->>>>>>> eeefea768fe6f5e6aa4317aa3fb67922ae40bbbd
