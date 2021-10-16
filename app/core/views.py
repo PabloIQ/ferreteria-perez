@@ -25,3 +25,8 @@ def Categoria (request):
 
 def Iproducto (request):
     return render (request, 'administrador/producto.html')
+
+def Proveedor (request):
+    return render (request, 'administrador/proveedor.html')
+def Registrarse (request):
+    return render (request, 'administrador/registrarse.html')
