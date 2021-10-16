@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.base import Model
-from django.db.models.fields import CommaSeparatedIntegerField
 from django.db.models.fields.related import ForeignKey
 
 class Foto (models.Model):

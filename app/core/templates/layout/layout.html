@@ -34,6 +34,9 @@
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="{% static 'css/slick.css' %}"/>
 	<link type="text/css" rel="stylesheet" href="{% static 'css/slick-theme.css' %}"/>
+
+    <!-----------------------Sweet Alwert 2--------------------------->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    
 </head>
 
@@ -146,10 +149,10 @@
               <a class="nav-link" href="#">Productos en Promocion</a>
               <a class="nav-link" href="#">Categorias</a>
               <div class="administrador">
-                  <select class="optionadmin"> 
-                        <option value="Administrador">Administrador</option>  
-                        <option value="Categoria">Crear Categoria</option>
-                        <option value="Producto">Ingresar Producto</option>
+                  <select class="optionadmin" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"> 
+                        <option value="">Administrador</option> 
+                        <option value="{% url 'categoria_' %}">Crear Categoria</option>
+                        <option value="{% url 'I_producto' %}">Ingresar Producto</option>
                         <option value="Proveedor">Registrar Proveedor</option>
                         <option value="Usuario">Registrar Usuario</option>
                   </select>

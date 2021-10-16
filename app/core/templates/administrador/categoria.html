@@ -1,13 +1,14 @@
 {% extends 'layout/layout.html' %}
 
 {% block contenido %}
-<form action="" class ="formulario">
-    <h1 class="formulario__titulo">Crear Categoria</h1>
-    <input type="text" class="formulario__input">
+  {% include 'message/messages.html' %}
+  <h1 class="formulario__titulo">Crear Categoria</h1>
+  <form method="POST" class ="formulario">
+    {% csrf_token %}
+    <input type="text" class="formulario__input" name="nombre">
     <label for="" class="formulario__label">Nombre de Categoria</label>
-  <br/>
-
-    <input type="submit" class="formulario__submit" value="Crear Categoria" onclick="alerta()">
-</form>
+    <br/>
+      <input type="submit" class="formulario__submit" value="Crear Categoria">
+  </form>
 
 {% endblock %}

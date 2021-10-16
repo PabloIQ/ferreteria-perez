@@ -1,0 +1,42 @@
+{% if messages %}
+    {% for msg in messages %}
+        {% if msg.tags == 'error' %}
+            <script>
+                Swal.fire({
+                    "title": "Error",
+                    "text": '{{ msg }}',
+                    "icon": "error"
+                })
+            </script>
+        {% elif msg.tags == 'warning' %}
+            <script>
+                Swal.fire({
+                    title: "Advertencia",
+                    text: '{{ msg }}',
+                    icon: "warning"
+                })
+            </script>
+        {% elif msg.tags == 'success' %}
+            <script>
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: '{{ msg }}',
+                    showConfirmButton: false,
+                    timer: 5000
+                })
+            </script>
+        {% elif msg.tags == 'info' %}
+            <script>
+                Swal.fire({
+                    title: "Información",
+                    text: '{{ msg }}',
+                    icon: 'info'
+                })
+            </script>
+        {% endif %}
+        <script>
+            console.log('{{ msg.tags }}')
+        </script>
+    {% endfor %}
+{% endif %}
