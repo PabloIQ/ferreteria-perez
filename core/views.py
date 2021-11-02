@@ -27,6 +27,9 @@ def Inicio (request):
 def Carrito (request):
     return render (request, 'producto/carrito.html')
 
+def Detproducto(request):
+    return render (request, 'producto/detproducto.html')
+
 
 @login_required(login_url='inicio_')
 def Categoria_ (request):

@@ -32,6 +32,7 @@ urlpatterns = [
     path('registrarse/',views.Registrarse, name='registrarse_'),
     path('login/', views.Login, name='login'),
     path('logout/', views.Logout, name='logout'),
+    path('detproducto/',views.Detproducto, name='detproducto_')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 #Configuracion para cargar imagenes
 """if settings.DEBUG:
