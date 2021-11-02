@@ -2300,7 +2300,7 @@ a {
 
 
 .myclass {
-  background-image: url('img/foco.jpg');
+  background-image: url('../img/foco.jpg');
 }
 
 
