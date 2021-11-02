@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 from django.db.models.fields.related import ForeignKey
 
 class Foto (models.Model):
-    url1 = models.ImageField(default='null')
-    url2 = models.ImageField(default='null')
-    url3 = models.ImageField(default='null')
+    url1 = models.ImageField(default='null', verbose_name='Miniatura', upload_to='imagenes')
+    url2 = models.ImageField(default='null', verbose_name='Miniatura', upload_to='imagenes')
+    url3 = models.ImageField(default='null', verbose_name='Miniatura', upload_to='imagenes')
 
 class Categoria (models.Model):
     nombre = models.CharField(max_length=60)

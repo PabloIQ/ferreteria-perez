@@ -2380,3 +2380,15 @@ margin-top: -120px;
 .fijar{
   margin-top: -120px;
 }
+
+.user {
+  background-color: #1e1f29;
+  border: none;
+  color: #FFF;
+  overflow-y: auto;
+}
+
+.option-user { 
+  font-size: 17px;
+  width: 100%;
+}

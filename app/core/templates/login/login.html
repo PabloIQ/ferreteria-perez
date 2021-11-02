@@ -1,0 +1,16 @@
+{% extends 'layout/layout.html' %}
+
+{% block contenido %}
+  {% include 'message/messages.html' %}
+  <h1 class="formulario__titulo">Iniciar sesión</h1>
+  <form method="POST" class ="formulario">
+    {% csrf_token %}
+    <input type="text" class="formulario__input" name="nombre">
+    <label for="" class="formulario__label"><i class="fas fa-user"></i> Usuario</label>
+    <input type="password" class="formulario__input" name="password">
+    <label for="" class="formulario__label"><i class="fas fa-unlock-alt"></i> Contaseña</label>
+    <br/>
+      <input type="submit" class="formulario__submit" value="Iniciar sesión">
+  </form>
+
+{% endblock %}

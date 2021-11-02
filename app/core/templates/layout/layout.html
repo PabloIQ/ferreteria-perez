@@ -54,9 +54,20 @@
 					</ul>
 					<ul class="header-links pull-right">
 				
-                        <li><a href="#" onclick="alerta()" > <i class="fas fa-user-edit"></i> Registrarse</a></li>
-						
-                        <li><a href="#"><i class="fa fa-user"></i> Mi Cuenta</a></li>
+                        <li><a href="{% url 'registrarse_' %}"> <i class="fas fa-user-edit"></i> Registrarse</a></li>
+                        <li>
+                            <i class="fa fa-user"></i>
+                            <select name="" id="" class="fa fa-user user" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                <option value="" class="option-user">Mi Cuenta</option>
+                                {% if user.is_authenticated %}
+                                    <option value="" class="option-user">{{ user.first_name }}</option>
+                                    <option value="" class="option-user">{{ user.email }}</option>
+                                    <option value="{% url 'logout' %}" class="option-user">Cerrar sesión</option>
+                                {% else %}
+                                    <option value="{% url 'login' %}" class="option-user">Iniciar sesión</option>
+                                {% endif %}
+                            </select>
+                        </li>
 					</ul>
 				</div>
 			</div>
@@ -147,16 +158,19 @@
              
               <a class="nav-link" href="{% url 'not_found' %}">Lo mas Visto!</a>
               <a class="nav-link" href="#">Productos en Promocion</a>
-              <a class="nav-link" href="#">Categorias</a>
-              <div class="administrador">
-                  <select class="optionadmin" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"> 
-                        <option value="">Administrador</option> 
-                        <option value="{% url 'categoria_' %}">Crear Categoria</option>
-                        <option value="{% url 'I_producto' %}">Ingresar Producto</option>
-                        <option value="Proveedor">Registrar Proveedor</option>
-                        <option value="Usuario">Registrar Usuario</option>
-                  </select>
-              </div>
+              {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                    <div class="administrador">
+                        <select class="optionadmin" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"> 
+                                <option value="">Administrador</option> 
+                                <option value="{% url 'categoria_' %}">Crear Categoria</option>
+                                <option value="{% url 'I_producto' %}">Ingresar Producto</option>
+                                <option value="{% url 'proveedor_' %}">Registrar Proveedor</option>
+                                <option value="{% url 'registrarse_' %}">Registrar Usuario</option>
+                        </select>
+                    </div>
+                {% endif %}
+              {% endif %}
             </div>
           </div>
         </div>

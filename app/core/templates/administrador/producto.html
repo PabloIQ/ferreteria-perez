@@ -1,7 +1,8 @@
 {% extends 'layout/layout.html' %}
 
 {% block contenido %}
-<form method="post" class ="formulario" enctype="multipart/form-data">
+    {% include 'message/messages.html' %}
+<form method="POST" class ="formulario" enctype="multipart/form-data">
     {% csrf_token %}
     <h1 class="formulario__titulo">Nuevo Producto</h1>
     <input type="text" class="formulario__input" name="nombre" required>
