@@ -1,28 +1,36 @@
 {% extends 'layout/layout.html' %}
 
 {% block contenido %}
-<form action="" class ="formulario">
-    <h1 class="formulario__titulo">Nuevo Registro de Usuario</h1>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Nombres</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Apellidos</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Correo</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Direccion</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Telefono</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Nit</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Contraseña</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Repita Contraseña</label>
-    <br/>
-
-    <input type="submit" class="formulario__submit" Value="Crear Nuevo Usuario">
-</form>
-
-
+    {% include 'message/messages.html' %}
+    <form class ="formulario" method="POST">
+        {% csrf_token %}
+        <h1 class="formulario__titulo">Nuevo Registro de Usuario</h1>
+        {{ registrar.username }}
+        <label for="usuario" class="formulario__label">Usuario</label>
+        {{ registrar.first_name }}
+        <label for="nombre" class="formulario__label">Nombres</label>
+        {{ registrar.last_name }}
+        <label for="apellido" class="formulario__label">Apellidos</label>
+        {{ registrar.email }}
+        <label for="correo" class="formulario__label">Correo</label>
+        <input name="direccion" type="text" class="formulario__input" required>
+        <label for="direccion" class="formulario__label">Direccion</label>
+        <input name="telefono" type="text" class="formulario__input" required maxlength="8">
+        <label for="telefono" class="formulario__label">Telefono</label>
+        <input name="nit" type="text" class="formulario__input" required maxlength="8">
+        <label for="nit" class="formulario__label">Nit</label>
+        {{ registrar.password1 }}
+        <label for="password1" class="formulario__label">Contraseña</label>
+        {{ registrar.password2 }}
+        <label for="password2" class="formulario__label">Repita Contraseña</label>
+        <br/>
+        <input type="submit" class="formulario__submit" Value="Crear Nuevo Usuario">
+    </form>
+    <script>
+        Swal.fire({
+            title: "Advertencia",
+            html: '{{ registrar.errors|escape }}',
+            icon: "warning"
+        })
+    </script>
 {% endblock %}

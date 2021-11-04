@@ -1,24 +1,23 @@
 {% extends 'layout/layout.html' %}
 
 {% block contenido %}
-<form action="" class ="formulario">
-    <h1 class="formulario__titulo">Nuevo Proveedor</h1>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Nombre</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Empresa</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Nit</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Telefono</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Correo</label>
-    <input type="text" class="formulario__input">
-    <label for="" class="formulario__label">Direccion</label>
-    <br/>
-
-    <input type="submit" class="formulario__submit" Value="Crear Proveedor">
-</form>
-
-
+    {% include 'message/messages.html' %}
+    <form method="POST" class ="formulario">
+        {% csrf_token %}
+        <h1 class="formulario__titulo">Nuevo Proveedor</h1>
+        <input name="nombre" type="text" class="formulario__input" required>
+        <label for="nombre" class="formulario__label">Nombre</label>
+        <input name="empresa" type="text" class="formulario__input" required>
+        <label for="empresa" class="formulario__label">Empresa</label>
+        <input name="nit" type="text" class="formulario__input" maxlength="8" required>
+        <label for="nit" class="formulario__label">Nit</label>
+        <input name="telefono" type="text" class="formulario__input" maxlength="8" required>
+        <label for="telefono" class="formulario__label">Telefono</label>
+        <input name="correo" type="text" class="formulario__input" required>
+        <label for="correo" class="formulario__label">Correo</label>
+        <input name="direccion" type="text" class="formulario__input" required>
+        <label for="direccion" class="formulario__label">Direccion</label>
+        <br/>
+        <input type="submit" class="formulario__submit" Value="Crear Proveedor">
+    </form>
 {% endblock %}

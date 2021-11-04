@@ -1,11 +1,14 @@
 from django.db.models.fields import PositiveIntegerRelDbTypeMixin
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from core.models import Categoria, Foto, Producto
+from core.forms import RegistrarForm
+from core.models import Categoria, Foto, Producto, Proveedor, Cliente
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
+
+from core.forms import RegistrarForm
 
 # Create your views here.
 def Index (request):
@@ -110,11 +113,66 @@ def Iproducto (request):
     })
 
 
-def Proveedor (request):
+def Proveedor_ (request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre']
+        empresa = request.POST['empresa']
+        nit = request.POST['nit']
+        telefono = request.POST['telefono']
+        correo = request.POST['correo']
+        direccion = request.POST['direccion']
+        try:
+            proveedor = Proveedor (
+                nombre = nombre,
+                empresa = empresa,
+                nit = nit,
+                telefono = telefono,
+                correo = correo,
+                dereccion = direccion
+            )
+            proveedor.save()
+            messages.success(request, 'Se ha registrado un nuevo proveedor')
+            return redirect('proveedor_')
+        except:
+            messages.error(request, 'Hubo un error al registrar nuevo proveedor!')
+
+        print ('Nombre: ', nombre)
+        print ('Empresa: ', empresa)
+        print ('NIT: ', nit)
+        print ('Telefono: ', telefono)
+        print ('Correo: ', correo)
+        print ('Direccion: ', direccion)
     return render (request, 'administrador/Proveedor.html')
 
 def Registrarse (request):
-    return render (request, 'administrador/Registrarse.html')
+    registrar_usuario = RegistrarForm()
+    if request.method == 'POST':
+        direccion = request.POST['direccion']
+        telefono = request.POST['telefono']
+        nit = request.POST['nit']
+        registrar_usuario = RegistrarForm(request.POST)
+        
+        try:
+            with transaction.atomic():
+                if registrar_usuario.is_valid():
+                    registrar_usuario.save()
+                
+                cliente = Cliente(
+                    user_cliente = User.objects.last(),
+                    direccion = direccion,
+                    telefono = telefono,
+                    nit = nit,
+                    tipo = 'minorista'
+                )
+                cliente.save()
+                messages.success(request, 'Te has registrado correctamente')
+                return redirect('login')
+        except:
+            messages.error(request, 'Hubo un error al registrarse, vuelve a intentarlo!')
+
+    return render (request, 'administrador/Registrarse.html', {
+        'registrar': registrar_usuario
+    })
 
 def Login (request):
     if request.method == 'POST':
