@@ -33,6 +33,9 @@ def Carrito (request):
 def Detproducto(request):
     return render (request, 'producto/detproducto.html')
 
+def Contproducto(request):
+    return render (request, 'producto/contproducto.html')
+
 
 @login_required(login_url='inicio_')
 def Categoria_ (request):

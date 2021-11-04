@@ -96,14 +96,15 @@
                 <div class="col-md-6">
                     <div class="header-search">
                         <form>
-                            <select class="input-select">
+                            <select class="input-select categoria__select">
                                 <option value="0">Categorias</option>
                                 <option value="1">Categoria 01</option>
                                 <option value="1">Categoria 02</option>
+                                <option value="1">Todas las Categorias</option>
                             </select>
                             <input  class="input" placeholder="Buscar Producto">
                                       
-                                    <button class="search-btn"><a href="{% url 'not_found' %}">Buscar</a></button>
+                                    <button class="search-btn buscar_color"><a href="{% url 'not_found' %}">Buscar</a></button>
                             
                         </form>
                     </div>
@@ -159,6 +160,7 @@
              
               <a class="nav-link" href="{% url 'not_found' %}">Lo mas Visto!</a>
               <a class="nav-link" href="#">Productos en Promocion</a>
+              <a class="nav-link" href="{% url 'contproducto_' %}">Ver todas las categorias</a>
               {% if user.is_authenticated %}
                 {% if user.is_staff %}
                     <div class="administrador">

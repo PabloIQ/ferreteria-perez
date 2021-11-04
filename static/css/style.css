@@ -189,6 +189,11 @@ textarea.input {
   height: 40px;
 }
 
+.categoria__select{
+  width: 158px;
+
+}
+
 /*-- checkbox & radio input --*/
 
 .input-radio, .input-checkbox {
@@ -1047,6 +1052,7 @@ textarea.input {
   border-radius: 40px;
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
+  font-size: 13px;
 }
 
 .product .add-to-cart .add-to-cart-btn>i {
@@ -1060,6 +1066,8 @@ textarea.input {
   opacity: 0;
   visibility: hidden;
 }
+
+
 
 .product .add-to-cart .add-to-cart-btn:hover {
   background-color: #FFF;
@@ -1204,6 +1212,41 @@ textarea.input {
 /*=========================================================
 	07 -> PRODUCTS PAGE
 ===========================================================*/
+/*----------------------------*\
+	Productos container
+\*----------------------------*/
+
+
+
+
+.contenedor{
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.caja{
+  border: 2px solid grey ;
+  height: 100px;
+  width: 200px;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  column-gap: 15px;
+  row-gap: 35px;
+
+}
+
+@media (min-width: 768px){
+.grid{
+  grid-template-columns: repeat(4,1fr);
+}
+
+}
+
+
+
 
 /*----------------------------*\
 	Aside
@@ -1523,6 +1566,7 @@ textarea.input {
 
 .product-details .product-options .input-select {
   width: 90px;
+  
 }
 
 .product-details .add-to-cart {
