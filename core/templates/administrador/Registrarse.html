@@ -26,11 +26,13 @@
         <br/>
         <input type="submit" class="formulario__submit" Value="Crear Nuevo Usuario">
     </form>
-    <script>
-        Swal.fire({
-            title: "Advertencia",
-            html: '{{ registrar.errors|escape }}',
-            icon: "warning"
-        })
-    </script>
+    {% if registrar.errors %}
+        <script>
+            Swal.fire({
+                title: "Advertencia",
+                html: '{{ registrar.errors|escape }}',
+                icon: "warning"
+            })
+        </script>
+    {% endif %}
 {% endblock %}

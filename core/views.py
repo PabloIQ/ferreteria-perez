@@ -1,8 +1,8 @@
 from django.db.models.fields import PositiveIntegerRelDbTypeMixin
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from core.forms import RegistrarForm
-from core.models import Categoria, Foto, Producto, Proveedor, Cliente
+from core.models import Categoria, Foto, Producto, Proveedor, Cliente, Carrito, Carrito_detalle
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db import transaction
@@ -23,18 +23,83 @@ def NotFound (request):
     return render (request, 'producto/notfound.html')
 
 def Inicio (request):
-    
 
     return render (request, 'producto/inicio.html')
     
-def Carrito (request):
-    return render (request, 'producto/carrito.html')
+def Carrito_ (request):
+    carrito = ''
+    subtotal = 0
+    if request.user.is_authenticated:
+        id_usuario = request.user.id
+        id_carrito = Carrito.objects.get(id_user=id_usuario)
+        carrito = Carrito_detalle.objects.filter(id_carrito=id_carrito)
+        for items in carrito:
+            total = float(items.total)
+            subtotal += total
 
-def Detproducto(request):
-    return render (request, 'producto/detproducto.html')
+    return render (request, 'producto/carrito.html', {
+        'carrito': carrito,
+        'subtotal': subtotal
+    })
+
+def DeleteCarrito(request, id):
+    fila = Carrito_detalle.objects.get(id=id)
+    fila.delete()
+    messages.info(request, 'Producto eleminado de la lista')
+    return redirect('carrito_')
+
+def ModificarCarrito(request, id, cantidad):
+    carrito = Carrito_detalle.objects.get(id_producto=id)
+    if int(cantidad) > int(carrito.id_producto.stock):
+        messages.warning(request, f'Stock del producto insuficiente, solo hay {carrito.id_producto.stock} en existencia')
+    else:
+        total = float(carrito.precio) * float(cantidad)
+        carrito.cantidad = cantidad
+        carrito.total = total
+        carrito.save()
+        print('Producto seleccionado: ', carrito.id_producto.nombre)
+        print('Id producto: ', id)
+        print('Cantidad producto: ', cantidad)
+
+    return redirect('carrito_')
+
+def ActualizarCarrito(request, id=0, precio=0):
+    if request.user.is_authenticated:
+        id_usuario = request.user.id
+        estado = Carrito_detalle.objects.filter(id_producto=id).filter(estado='pendiente')
+        print('EStado producto: ', len(estado))
+
+        if len(estado) == 1:
+            messages.info(request, 'El producto ya existe en carrito!')
+        else:
+            det_carrito = Carrito_detalle(
+                id_carrito = Carrito.objects.get(id_user=id_usuario),
+                id_producto = Producto.objects.get(id=id),
+                cantidad = 1,
+                precio = precio,
+                total = precio,
+                estado = 'pendiente'
+            )
+            det_carrito.save()
+            return redirect('carrito_')
+    else:
+        messages.info(request, 'Inicia sesion!')
+    
+    return redirect('contproducto_')
+
+def Detproducto(request, id=0):
+    print ('Id de producto: ', id)
+    producto = Producto.objects.get(id=id)
+    return render (request, 'producto/detproducto.html', {
+        'producto': producto
+    })
 
 def Contproducto(request):
-    return render (request, 'producto/contproducto.html')
+    producto = Producto.objects.all()
+
+    return render (request, 'producto/contproducto.html', {
+        'producto': producto
+    })
 
 
 @login_required(login_url='inicio_')
@@ -68,7 +133,6 @@ def Iproducto (request):
         categoria = request.POST['categoria']
         imagen = request.FILES.getlist('imagen')
         promocion = request.POST.getlist('promocion')
-
 
         try:
             with transaction.atomic():
@@ -139,12 +203,6 @@ def Proveedor_ (request):
         except:
             messages.error(request, 'Hubo un error al registrar nuevo proveedor!')
 
-        print ('Nombre: ', nombre)
-        print ('Empresa: ', empresa)
-        print ('NIT: ', nit)
-        print ('Telefono: ', telefono)
-        print ('Correo: ', correo)
-        print ('Direccion: ', direccion)
     return render (request, 'administrador/Proveedor.html')
 
 def Registrarse (request):
@@ -168,6 +226,12 @@ def Registrarse (request):
                     tipo = 'minorista'
                 )
                 cliente.save()
+
+                carrito = Carrito(
+                    id_user = User.objects.last()
+                )
+                carrito.save()
+
                 messages.success(request, 'Te has registrado correctamente')
                 return redirect('login')
         except:

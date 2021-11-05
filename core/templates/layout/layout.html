@@ -8,9 +8,7 @@
     
     <title>Inicio</title>
     <!-- Link Boostrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
-    crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <!-- /Link Boostrap -->
 
     <link rel="stylesheet" href="{% static 'css/slick-theme.css' %}">
@@ -38,6 +36,7 @@
 
     <!-----------------------Sweet Alwert 2--------------------------->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
    
 </head>
 
@@ -96,11 +95,11 @@
                 <div class="col-md-6">
                     <div class="header-search">
                         <form>
-                            <select class="input-select categoria__select">
-                                <option value="0">Categorias</option>
-                                <option value="1">Categoria 01</option>
-                                <option value="1">Categoria 02</option>
-                                <option value="1">Todas las Categorias</option>
+                            <select class="input-select categoria__select" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                <option value="">Categorias</option>
+                                <option value="">Categoria 01</option>
+                                <option value="">Categoria 02</option>
+                                <option value="{% url 'contproducto_' %}">Todas las Categorias</option>
                             </select>
                             <input  class="input" placeholder="Buscar Producto">
                                       
