@@ -41,12 +41,21 @@
         <div class="store-filter clearfix">
             <span class="store-qty">Productos 12 de 100 </span>
             <ul class="store-pagination">
-                <li class="active">1</li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-            </ul>
+                {% if producto.has_previous %}
+                    <li><a href="?page={{producto.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+                {% endif %}
+                    {% for i in producto.paginator %}
+                    <!--<li class="active">1</li>-->
+                    {% ifequal producto.number i.number %}
+                        <li class="active"><a href="?page={{i.number}}">{{i.number}}</a></li>
+                    {% else %}
+                        <li><a href="?page={{i.number}}">{{i.number}}</a></li>
+                    {% endifequal %}
+                    {% endfor %}
+                {% if producto.has_next %}
+                    <li><a href="?page={{producto.next_page_number}}"><i class="fa fa-angle-right"></i></a></li>
+                {% endif %}
+            </ul> 
         </div>
         <!-- /store bottom filter -->
 </main>
