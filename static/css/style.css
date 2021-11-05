@@ -1212,11 +1212,17 @@ textarea.input {
 /*=========================================================
 	07 -> PRODUCTS PAGE
 ===========================================================*/
+.col-md-12{
+  position:relative;
+  min-height:1px;
+  padding-right:15px;
+  padding-left:15px}
+
+
+
 /*----------------------------*\
 	Productos container
 \*----------------------------*/
-
-
 
 
 .contenedor{
