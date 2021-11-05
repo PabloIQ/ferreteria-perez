@@ -185,6 +185,24 @@ inputs[i].addEventListener('keyup', function(){
 
 }
 
-function alerta(){
-    alert("Categoria Creada");
+
+/*     Redireccionamiento al carrito     */
+
+function Carrito (id, precio) {
+	window.location = `/actualizar-carrito/${id}/${precio}`
+}
+
+/*btn = document.querySelectorAll('.btn-danger')
+btn.addEventListener('click', (event) => {
+	console.log(event.target)
+})*/
+function Guardar(id) {
+	var dato = document.getElementById('cantidad'+id).value;
+	console.log('Cantidad: ' + dato);
+	console.log('Id producto: ', id)
+	window.location = `/modificar-carrito/${id}/${dato}`
+}
+
+function Borrar(id){
+	window.location = `/delete-carrito/${id}`
 }

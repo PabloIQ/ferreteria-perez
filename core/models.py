@@ -45,6 +45,7 @@ class Carrito_detalle (models.Model):
     id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=0)
     precio = models.FloatField(default=0)
+    total = models.FloatField(default=0)
     estado = models.CharField(max_length=10)
     
 class Cliente (models.Model):

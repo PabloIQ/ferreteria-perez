@@ -25,14 +25,17 @@ urlpatterns = [
     path('crear-producto/', views.CrearProducto, name='crear_producto'),
     path('notfound/', views.NotFound, name='not_found'),
     path('inicio/', views.Inicio, name='inicio_'),
-    path('carrito/', views.Carrito, name='carrito_'),
+    path('carrito/', views.Carrito_, name='carrito_'),
+    path('delete-carrito/<id>', views.DeleteCarrito, name='delete_carrito'),
+    path('actualizar-carrito/<id>/<precio>', views.ActualizarCarrito, name='actualizar_carrito'),
+    path('modificar-carrito/<id>/<cantidad>', views.ModificarCarrito, name='modificar_carrito'),
     path('categoria/', views.Categoria_, name='categoria_'),
     path('iproducto/',views.Iproducto, name='I_producto'),
     path('proveedor/', views.Proveedor_, name='proveedor_'),
     path('registrarse/',views.Registrarse, name='registrarse_'),
     path('login/', views.Login, name='login'),
     path('logout/', views.Logout, name='logout'),
-    path('detproducto/',views.Detproducto, name='detproducto_'),
+    path('detproducto/<id>',views.Detproducto, name='detproducto_'),
     path('contproducto/', views.Contproducto, name='contproducto_')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 #Configuracion para cargar imagenes
