@@ -58,6 +58,8 @@
                             <dd class="text-right ml-3"> Q {{ subtotal|escape }}
                             </dd>
                         </dl>
+                        <script src="https://www.paypal.com/sdk/js?client-id=test"></script>
+                        <script>paypal.Buttons().render('body');</script>
                         <hr> <a href="#" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Realizar Compra </a> <a href="{% url 'contproducto_' %}" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continuar Comprando</a>
                     </div>
                 </div>
