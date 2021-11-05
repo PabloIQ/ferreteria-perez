@@ -1,3 +1,4 @@
+from django.core import paginator
 from django.db.models.fields import PositiveIntegerRelDbTypeMixin
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
@@ -9,6 +10,8 @@ from django.db import transaction
 from django.contrib.auth.decorators import login_required
 
 from core.forms import RegistrarForm
+
+from django.core.paginator import Paginator
 
 # Create your views here.
 def Index (request):
@@ -96,9 +99,13 @@ def Detproducto(request, id=0):
 
 def Contproducto(request):
     producto = Producto.objects.all()
+    paginator = Paginator(producto, 8)
+
+    page = request.GET.get('page')
+    page_product = paginator.get_page(page)
 
     return render (request, 'producto/contproducto.html', {
-        'producto': producto
+        'producto': page_product
     })
 
 
