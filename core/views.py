@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from core.forms import RegistrarForm
 from core.models import Categoria, Foto, Producto, Proveedor, Cliente, Carrito, Carrito_detalle, Venta
-from core.models import Detalle_venta
+from core.models import Detalle_venta, Pedido
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db import transaction
@@ -12,10 +12,17 @@ from core.forms import RegistrarForm
 
 from django.core.paginator import Paginator
 
+categoria_list = Categoria.objects.values('id', 'nombre')
+numero = 0
+
 # Create your views here.
 def Index (request):
+    
 
-    return render(request, 'layout/layout.html')
+    return render(request, 'layout/layout.html', {
+        'categoria': categoria_list,
+        'cant_carrito': numero
+    })
 
 def CrearProducto (request):
     return render (request, 'producto/crear.html')
@@ -25,8 +32,17 @@ def NotFound (request):
     return render (request, 'producto/notfound.html')
 
 def Inicio (request):
+    if request.user.is_authenticated:
+        id_usuario = request.user.id
+        id_carrito = Carrito.objects.get(id_user=id_usuario)
+        carrito = Carrito_detalle.objects.filter(id_carrito=id_carrito).filter(estado='pendiente')
+        print('Cantidad producto carrito: ', len(carrito))
+        globals()['numero'] = len(carrito)
 
-    return render (request, 'producto/inicio.html')
+    return render (request, 'producto/inicio.html', {
+        'categoria': categoria_list,
+        'cant_carrito': numero
+    })
     
 def Carrito_ (request):
     carrito = ''
@@ -41,7 +57,9 @@ def Carrito_ (request):
 
     return render (request, 'producto/carrito.html', {
         'carrito': carrito,
-        'subtotal': subtotal
+        'subtotal': subtotal,
+        'categoria': categoria_list,
+        'cant_carrito': numero
     })
 
 def DeleteCarrito(request, id):
@@ -91,7 +109,9 @@ def Detproducto(request, id=0):
     print ('Id de producto: ', id)
     producto = Producto.objects.get(id=id)
     return render (request, 'producto/detproducto.html', {
-        'producto': producto
+        'producto': producto,
+        'categoria': categoria_list,
+        'cant_carrito': numero
     })
 
 def Contproducto(request):
@@ -102,8 +122,40 @@ def Contproducto(request):
     page_product = paginator.get_page(page)
 
     return render (request, 'producto/contproducto.html', {
-        'producto': page_product
+        'producto': page_product,
+        'categoria': categoria_list,
+        'cant_carrito': numero
     })
+
+def ProductoCategoria(request, id=0):
+    producto = Producto.objects.filter(id_categoria=id)
+    paginator = Paginator(producto, 10)
+
+    page = request.GET.get('page')
+    page_product = paginator.get_page(page)
+
+    return render (request, 'producto/contproducto.html', {
+        'producto': page_product,
+        'categoria': categoria_list,
+        'cant_carrito': numero
+    })
+
+def BuscarProducto(request, texto):
+    producto = Producto.objects.filter(nombre__icontains=texto)
+    if len(producto) == 0:
+        return redirect('not_found')
+    else:
+        paginator = Paginator(producto, 10)
+
+        page = request.GET.get('page')
+        page_product = paginator.get_page(page)
+
+    return render (request, 'producto/contproducto.html', {
+        'producto': page_product,
+        'categoria': categoria_list,
+        'cant_carrito': numero
+    })
+
 
 def Vender(request):
     id_usuario = request.user.id
@@ -133,7 +185,23 @@ def Vender(request):
             )
             det_venta.save()
 
+            pedido = Pedido (
+                id_venta = Venta.objects.last(),
+                id_usuario = User.objects.get(id=id_usuario),
+                estado_envio = 'pedido',
+                no_guia = '000001'
+            )
+            pedido.save()
+
     return redirect('contproducto_')
+
+def VerPedidos(request):
+    #pedido = Pedido.objects.filter(id_user=request.user.id)
+    id_usuario = request.user.id
+    pedido = Pedido.objects.filter(id_usuario=id_usuario)
+    return render(request, 'producto/pedidos.html', {
+        'pedido': pedido
+    })
 
 
 @login_required(login_url='inicio_')
@@ -153,7 +221,9 @@ def Categoria_ (request):
                 return redirect ('inicio_')
             except:
                 messages.error(request, 'Se produjo un error, vuelva a intentarlo')
-    return render (request, 'administrador/categoria.html')
+    return render (request, 'administrador/categoria.html', {
+        'categoria': categoria_list
+    })
 
 def Iproducto (request):
     categoria_list = Categoria.objects.values('id', 'nombre')
@@ -210,7 +280,7 @@ def Iproducto (request):
             messages.error(request, 'Hubu un error al crear producto, vuelva a intentarlo!!')
 
     return render (request, 'administrador/producto.html', {
-        'categoria': categoria_list
+        'categoria': categoria_list,
     })
 
 
@@ -272,7 +342,9 @@ def Registrarse (request):
             messages.error(request, 'Hubo un error al registrarse, vuelve a intentarlo!')
 
     return render (request, 'administrador/Registrarse.html', {
-        'registrar': registrar_usuario
+        'registrar': registrar_usuario,
+        'cant_carrito': numero
+
     })
 
 def Login (request):

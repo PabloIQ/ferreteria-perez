@@ -69,6 +69,7 @@ class Detalle_venta (models.Model):
 
 class Pedido (models.Model):
     id_venta = models.ForeignKey(Venta, on_delete=models.CASCADE)
+    id_usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     estado_envio = models.CharField(max_length=10)
     no_guia = models.CharField(max_length=15)
 

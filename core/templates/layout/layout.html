@@ -63,6 +63,7 @@
                                     <option value="" class="option-user">{{ user.first_name }}</option>
                                     <option value="" class="option-user">{{ user.email }}</option>
                                     <option value="{% url 'logout' %}" class="option-user">Cerrar sesión</option>
+                                    <option value="{% url 'pedidos' %}" class="option-user">Mis pedidos</option>
                                 {% else %}
                                     <option value="{% url 'login' %}" class="option-user">Iniciar sesión</option>
                                 {% endif %}
@@ -96,16 +97,17 @@
                     <div class="header-search">
                         <form>
                             <select class="input-select categoria__select" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                                <option value="">Categorias</option>
-                                <option value="">Categoria 01</option>
-                                <option value="">Categoria 02</option>
+                                {% for items in categoria %}
+                                    <option value="{% url 'producto_categoria' items.id %}">{{items.nombre}}</option>
+                                {% endfor %}
                                 <option value="{% url 'contproducto_' %}">Todas las Categorias</option>
                             </select>
-                            <input  class="input" placeholder="Buscar Producto">
+                            <input name="buscar"  class="input" id="buscar-producto" placeholder="Buscar Producto">
                                       
-                                    <button class="search-btn buscar_color"><a href="{% url 'not_found' %}">Buscar</a></button>
-                            
+                            <!--<button id="btnbuscar" class="search-btn buscar_color input">Buscar</button>-->
+                            <div id="btnbuscar" class="search-btn buscar_color input">Buscar</div>
                         </form>
+                        
                     </div>
                 </div>
                 <!-- /SEARCH BAR -->
@@ -122,7 +124,11 @@
                             <a onclick="enlace()" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Ver Carrito</span>
-                                <div class="qty">0</div>
+                                {% if user.is_authenticated %}
+                                    <div class="qty">{{cant_carrito}}</div>
+                                {% else %}
+                                    <div class="qty">0</div>
+                                {% endif %}
                             </a>
                         </div>
                         

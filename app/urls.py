@@ -37,7 +37,10 @@ urlpatterns = [
     path('login/', views.Login, name='login'),
     path('logout/', views.Logout, name='logout'),
     path('detproducto/<id>',views.Detproducto, name='detproducto_'),
-    path('contproducto/', views.Contproducto, name='contproducto_')
+    path('contproducto/', views.Contproducto, name='contproducto_'),
+    path('producto-categoria/<id>', views.ProductoCategoria, name='producto_categoria'),
+    path('buscar-producto/<texto>', views.BuscarProducto, name='buscar_producto'),
+    path('pedidos/', views.VerPedidos, name='pedidos'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 #Configuracion para cargar imagenes
 """if settings.DEBUG:
