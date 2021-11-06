@@ -1,9 +1,8 @@
-from django.core import paginator
-from django.db.models.fields import PositiveIntegerRelDbTypeMixin
-from django.shortcuts import redirect, render, HttpResponse
+from django.shortcuts import redirect, render
 from django.contrib import messages
 from core.forms import RegistrarForm
-from core.models import Categoria, Foto, Producto, Proveedor, Cliente, Carrito, Carrito_detalle
+from core.models import Categoria, Foto, Producto, Proveedor, Cliente, Carrito, Carrito_detalle, Venta
+from core.models import Detalle_venta
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db import transaction
@@ -35,7 +34,7 @@ def Carrito_ (request):
     if request.user.is_authenticated:
         id_usuario = request.user.id
         id_carrito = Carrito.objects.get(id_user=id_usuario)
-        carrito = Carrito_detalle.objects.filter(id_carrito=id_carrito)
+        carrito = Carrito_detalle.objects.filter(id_carrito=id_carrito).filter(estado='pendiente')
         for items in carrito:
             total = float(items.total)
             subtotal += total
@@ -52,7 +51,8 @@ def DeleteCarrito(request, id):
     return redirect('carrito_')
 
 def ModificarCarrito(request, id, cantidad):
-    carrito = Carrito_detalle.objects.get(id_producto=id)
+    carrito = Carrito_detalle.objects.get(id=id)
+
     if int(cantidad) > int(carrito.id_producto.stock):
         messages.warning(request, f'Stock del producto insuficiente, solo hay {carrito.id_producto.stock} en existencia')
     else:
@@ -60,9 +60,6 @@ def ModificarCarrito(request, id, cantidad):
         carrito.cantidad = cantidad
         carrito.total = total
         carrito.save()
-        print('Producto seleccionado: ', carrito.id_producto.nombre)
-        print('Id producto: ', id)
-        print('Cantidad producto: ', cantidad)
 
     return redirect('carrito_')
 
@@ -99,7 +96,7 @@ def Detproducto(request, id=0):
 
 def Contproducto(request):
     producto = Producto.objects.all()
-    paginator = Paginator(producto, 8)
+    paginator = Paginator(producto, 10)
 
     page = request.GET.get('page')
     page_product = paginator.get_page(page)
@@ -107,6 +104,36 @@ def Contproducto(request):
     return render (request, 'producto/contproducto.html', {
         'producto': page_product
     })
+
+def Vender(request):
+    id_usuario = request.user.id
+    carrito = Carrito.objects.get(id_user=id_usuario)
+    carrito_det = Carrito_detalle.objects.filter(id_carrito=carrito.id).filter(estado='pendiente')
+    with transaction.atomic():
+        for i in carrito_det:
+            producto = Producto.objects.get(id=i.id_producto.id)
+            producto.stock = int(producto.stock) - int(i.cantidad)
+            producto.save()
+
+            i.estado = 'cancelado'
+            i.save()
+
+            venta = Venta (
+                id_user = User.objects.get(id=id_usuario)
+            )
+            venta.save()
+
+            det_venta = Detalle_venta (
+                id_venta = Venta.objects.last(),
+                id_producto = Producto.objects.get(id=i.id_producto.id),
+                cantidad = i.cantidad,
+                precio = i.id_producto.precio_publico,
+                descuento = 0,
+                total = i.total
+            )
+            det_venta.save()
+
+    return redirect('contproducto_')
 
 
 @login_required(login_url='inicio_')

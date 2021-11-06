@@ -19,6 +19,7 @@
                     </div>
                     <div class="product-body">
                         <p class="product-category">{{ items.id_categoria.nombre }}</p>
+                        <p class="product-category">Stock: {{ items.stock }}</p>
                         <h3 class="product-name"><a href="">{{ items.nombre }}</a></h3>
                         <h4 class="product-price">Q {{ items.precio_publico|escape }} <del class="product-old-price">Q 1990.00</del></h4>
                         <div class="product-rating">
@@ -58,5 +59,6 @@
             </ul> 
         </div>
         <!-- /store bottom filter -->
+
 </main>
 {% endblock %}

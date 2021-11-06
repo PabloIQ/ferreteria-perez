@@ -26,11 +26,12 @@
                                             <div class="aside"><img src="/media/{{ items.id_producto.id_foto.url1 }}" class="img-sm"></div>
                                             <figcaption class="info"> <a href="#" class="title text-dark" data-abc="true">{{ items.id_producto.nombre }}</a>
                                                 <p class="text-muted small">Categoría: {{ items.id_producto.id_categoria.nombre }}</p>
+                                                <p class="text-muted small">Stock: {{ items.id_producto.stock }}</p>
                                             </figcaption>
                                         </figure>
                                     </td>
                                     <td> 
-                                        <input name="cantidad" id="cantidad{{ items.id_producto.id }}" type="text" value="{{ items.cantidad }}">
+                                        <input name="cantidad" id="cantidad{{ items.id }}" type="text" value="{{ items.cantidad }}">
                                     <td>
                                         <div class="price-wrap"> <var class="price">Q {{ items.id_producto.precio_publico|escape }}</var> </div>
                                     </td>
@@ -39,7 +40,8 @@
                                     </td>
                                     <td class="btn-group">
                                         <button onclick="Borrar('{{ items.id }}')" class="btn btn-danger " data-abc="true">Borrar</button>
-                                        <button onclick="Guardar('{{ items.id_producto.id }}')" class="btn btn-success " data-abc="true">Guardar</button>
+                                        <!--<button onclick="Guardar('{{ items.id_producto.id }}')" class="btn btn-success " data-abc="true">Guardar</button>-->
+                                        <button onclick="Guardar('{{ items.id }}')" class="btn btn-success " data-abc="true">Guardar</button>
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -58,6 +60,7 @@
                             <dd class="text-right ml-3"> Q {{ subtotal|escape }}
                             </dd>
                         </dl>
+<<<<<<< HEAD
                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                             <input type="hidden" name="cmd" value="_s-xclick">
                             <input type="hidden" name="hosted_button_id" value="UZE4PA6PKM8PN">
@@ -66,9 +69,70 @@
                             </form>
                             
                         <hr> <a href="#" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Realizar Compra </a> <a href="{% url 'contproducto_' %}" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continuar Comprando</a>
+=======
+                        <script>paypal.Buttons().render('body');</script>
+                        <hr> 
+                        <!--<a href="#" id="paypal-button-container" data-abc="true"> </a>-->
+                        <div id="paypal-button-container"></div>
+                        <a href="{% url 'contproducto_' %}" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continuar Comprando</a>
+>>>>>>> ad3013a1438efabe6b98fc19f4ef10dce1494607
                     </div>
                 </div>
             </aside>
         </div>
-    </div>          
+    </div>    
+    
+    
+
+
+    <!--------------------------Paypal----------------------------------->
+    <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AQwvkB4UjbRpbVkL6Zi9VMQlNZ-jd4pcAGAK03s-OTHUuwvKureUIb8flr655rJPBuzx7C3DLU8Pd4Kp&currency=USD"></script>
+
+    <script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '{{subtotal|escape}}'
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For demo purposes:
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    console.log('Mi resultado: ' + transaction.status) //COMPLETED
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Detalle de pago',
+                        text: 'Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details'
+                    })
+                    function Vender() {
+                        if(transaction.status == 'COMPLETED'){
+                            window.location = `/vender/`
+                        }
+                    }
+                    setTimeout(Vender, 2000)
+                    //alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                    // Replace the above to show a success message within this page, e.g.
+                    // const element = document.getElementById('paypal-button-container');
+                    // element.innerHTML = '';
+                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
 {% endblock %}
