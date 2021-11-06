@@ -87,18 +87,18 @@ WSGI_APPLICATION = 'app.wsgi.application'
     }
 }"""
 
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'db_desarrollo_web',
         'USER': 'postgres',
-        'PASSWORD': '123456789',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': 5432
     }
-}"""
+}
 
-import dj_database_url
+"""import dj_database_url
 from decouple import config
 
 
@@ -106,7 +106,7 @@ DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL')
     )
-}
+}"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
