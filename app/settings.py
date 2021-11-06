@@ -97,7 +97,6 @@ WSGI_APPLICATION = 'app.wsgi.application'
         'PORT': 5432
     }
 }"""
-
 import dj_database_url
 from decouple import config
 

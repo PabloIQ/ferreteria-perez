@@ -12,7 +12,7 @@ from core.forms import RegistrarForm
 
 from django.core.paginator import Paginator
 
-categoria_list = Categoria.objects.values('id', 'nombre')
+categoria_list = ''
 numero = 0
 
 # Create your views here.
@@ -38,6 +38,7 @@ def Inicio (request):
         carrito = Carrito_detalle.objects.filter(id_carrito=id_carrito).filter(estado='pendiente')
         print('Cantidad producto carrito: ', len(carrito))
         globals()['numero'] = len(carrito)
+        globals()['categoria_list'] = Categoria.objects.values('id', 'nombre')
 
     return render (request, 'producto/inicio.html', {
         'categoria': categoria_list,
