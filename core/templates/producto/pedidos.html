@@ -1,0 +1,47 @@
+{% extends 'layout/layout.html' %}
+
+{% block contenido %}
+    {% include 'message/messages.html' %}
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col-lg-9">
+                <div class="card">
+                    <div class="table-responsive">
+
+                        <table class="table table-borderless table-shopping-cart">
+                            <thead class="text-muted">
+                                <tr class="small text-uppercase">
+                                    <th scope="col" width="120">No. de pedido</th>
+                                    <th scope="col" width="120">No. de guía</th>
+                                    <th scope="col" width="120">Fecha de compra</th>
+                                    <th scope="col" width="120">Estado de pedido</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for items in pedido %}
+                                <tr>
+                                    <td> 
+                                        {{ items.id }}
+                                    </td>
+                                    <td>
+                                        {{items.no_guia}}
+                                    </td>
+                                    <td>
+                                        {{items.id_venta.fecha_creacion}}
+                                    </td>
+                                    <td>
+                                        {{items.estado_envio}}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </aside>
+            
+        </div>
+    </div>    
+{% endblock %}

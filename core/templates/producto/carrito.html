@@ -60,31 +60,15 @@
                             <dd class="text-right ml-3"> Q {{ subtotal|escape }}
                             </dd>
                         </dl>
-<<<<<<< HEAD
-                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                            <input type="hidden" name="cmd" value="_s-xclick">
-                            <input type="hidden" name="hosted_button_id" value="UZE4PA6PKM8PN">
-                            <input type="image" src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal, la forma rápida y segura de pagar en Internet.">
-                            <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
-                            </form>
-                            
-                        <hr> <a href="#" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Realizar Compra </a> <a href="{% url 'contproducto_' %}" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continuar Comprando</a>
-=======
-                        <script>paypal.Buttons().render('body');</script>
                         <hr> 
                         <!--<a href="#" id="paypal-button-container" data-abc="true"> </a>-->
                         <div id="paypal-button-container"></div>
                         <a href="{% url 'contproducto_' %}" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continuar Comprando</a>
->>>>>>> ad3013a1438efabe6b98fc19f4ef10dce1494607
                     </div>
                 </div>
             </aside>
         </div>
     </div>    
-    
-    
-
-
     <!--------------------------Paypal----------------------------------->
     <!-- Include the PayPal JavaScript SDK -->
     <script src="https://www.paypal.com/sdk/js?client-id=AQwvkB4UjbRpbVkL6Zi9VMQlNZ-jd4pcAGAK03s-OTHUuwvKureUIb8flr655rJPBuzx7C3DLU8Pd4Kp&currency=USD"></script>

@@ -198,11 +198,19 @@ btn.addEventListener('click', (event) => {
 })*/
 function Guardar(id) {
 	var dato = document.getElementById('cantidad'+id).value;
-	console.log('Cantidad: ' + dato);
-	console.log('Id producto: ', id)
 	window.location = `/modificar-carrito/${id}/${dato}`
 }
 
 function Borrar(id){
 	window.location = `/delete-carrito/${id}`
+}
+btn = document.getElementById('btnbuscar')
+btn.addEventListener('click', BuscarProducto)
+
+function BuscarProducto(){
+	var texto = document.getElementById('buscar-producto').value
+	console.log('Mi texto: ' + texto.length)
+	if(texto.length > 0){
+		window.location = `/buscar-producto/${texto}`
+	}
 }
