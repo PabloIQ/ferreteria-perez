@@ -96,9 +96,14 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': 5432
     }
+<<<<<<< HEAD
 }
 
 """import dj_database_url
+=======
+}"""
+import dj_database_url
+>>>>>>> 65d9fda0de058c2addc5f4032726aa2e8903d485
 from decouple import config
 
 
